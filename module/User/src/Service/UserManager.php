@@ -105,6 +105,7 @@ class UserManager
     public function createAdminUserIfNotExists()
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy([]);
+        
         if ($user==null) {
             $user = new User();
             $user->setEmail('tarid1997@gmail.com');
@@ -114,15 +115,6 @@ class UserManager
             $user->setPassword($passwordHash);
             $user->setStatus(User::STATUS_ACTIVE);
             $user->setDateCreated(date('Y-m-d H:i:s'));
-
-            // setting password reset token
-            $bcrypt = new Bcrypt();
-            $tokenHash = $bcrypt->create($token);
-            $user->setPasswordResetToken($tokenHash);
-
-            // setting password reset token date
-            $currentDate = date('Y-m-d');
-            $user->setPasswordResetTokenCreationDate($currentDate);
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
