@@ -6,10 +6,11 @@
  * and open the template in the editor.
  */
 
-namespace Application\Controller\Factory;
+namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Entity\Canteen;
 
 /**
  * Description of CanteenController
@@ -17,6 +18,13 @@ use Zend\View\Model\ViewModel;
  * @author masha
  */
 class CanteenController extends AbstractActionController {
+
+    
+    /**
+     * Entity manager.
+     * @var Doctrine\ORM\EntityManager
+     */
+    protected $entityManager;
 
     public function __construct($entityManager) {
         $this->entityManager = $entityManager;
@@ -32,6 +40,21 @@ class CanteenController extends AbstractActionController {
 
     public function deleteAction() {
         
+    }
+    
+    public function showAction(){
+        
+        $canteen = $this->entityManager->getRepository(Canteen::class)->findAll();
+//        $canteenUnit  = new Canteen();
+//        $canteenUnit->set_name('Mala wyspa');
+//        $canteenUnit->set_adress('Bursaki 2');
+//        $canteenUnit->set_city('Lublin');
+//        $canteenUnit->set_post('20-081');
+//        $canteenUnit->set_user_id(3);
+//        $this->entityManager->persist($canteenUnit);
+//        $this->entityManager->flush();
+        var_dump($canteen);
+        exit();
     }
 
 }

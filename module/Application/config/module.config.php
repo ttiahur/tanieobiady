@@ -10,6 +10,7 @@ namespace Application;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
     'router' => [
@@ -44,11 +45,22 @@ return [
                     ],
                 ],
             ],            
+            'canteen' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/canteen',
+                    'defaults' => [
+                        'controller' => Controller\CanteenController::class,
+                        'action'     => 'show',
+                    ],
+                ],
+            ],            
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
+            Controller\CanteenController::class => Controller\Factory\CanteenControllerFactory::class
         ],
     ],
     // The 'access_filter' key is used by the User module to restrict or permit
@@ -110,5 +122,30 @@ return [
             'message_close_string'     => '</li></ul></div>',
             'message_separator_string' => '</li><li>'
         ]
-    ],   
+    ],
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+                'driverClass' => PDOMySqlDriver::class,
+                'params' => [
+                    'host' => 'sql7.freemysqlhosting.net',
+                    'user' => 'sql7264938',
+                    'password' => 'z5gaS6R71w',
+                    'dbname' => 'sql7264938',
+                ]
+            ],            
+        ],        
+        'driver' => [
+            __NAMESPACE__ . '_driver' => [
+                'class' => AnnotationDriver::class,
+                'cache' => 'array',
+                'paths' => [__DIR__ . '/../src/Entity']
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                ]
+            ]
+        ]
+    ],
 ];

@@ -119,10 +119,10 @@ return [
             'orm_default' => [
                 'driverClass' => PDOMySqlDriver::class,
                 'params' => [
-                    'host'     => 'localhost:3306',                    
-                    'user'     => 'root',
-                    'password' => '',
-                    'dbname'   => 'start',
+                    'host' => 'sql7.freemysqlhosting.net',
+                    'user' => 'sql7264938',
+                    'password' => 'z5gaS6R71w',
+                    'dbname' => 'sql7264938',
                 ]
             ],            
         ],        

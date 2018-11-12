@@ -4,7 +4,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use User\Entity\User;
-
+use Application\Entity\Canteen;
 /**
  * This is the main controller class of the User Demo application. It contains
  * site-wide actions such as Home or About.
@@ -41,7 +41,7 @@ class IndexController extends AbstractActionController
     {              
         $appName = 'User Demo';
         $appDescription = 'This demo shows how to implement user management with Zend Framework 3';
-        
+                 
         // Return variables to view script with the help of
         // ViewObject variable container
         return new ViewModel([
